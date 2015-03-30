@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: pl.nazaweb.jboss.hot.deploy
+OpenIDE-Module-Localizing-Bundle: pl/nazaweb/jboss/hot/deploy/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
