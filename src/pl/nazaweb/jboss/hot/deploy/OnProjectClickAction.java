@@ -30,6 +30,7 @@ public final class OnProjectClickAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ev) {
+        boolean shouldAttachWatcher = Paths.getInstance().shouldAttachWatcher();
         File toAdd = new FileChooserBuilder("user-dir").setTitle("Pick deployed app directory").
                 setDefaultWorkingDirectory(new File(System.getProperty("user.home")))
                 .setApproveText("Open")
@@ -38,10 +39,12 @@ public final class OnProjectClickAction implements ActionListener {
         Paths.getInstance().setJbossPath(toAdd);
         Path path = java.nio.file.Paths.get(context.getProjectDirectory().getPath());
         Paths.getInstance().setProjectPath(path.toFile());
-        try {
-            new FileChangeWatcher(path).watch();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (shouldAttachWatcher) {
+            try {
+                new FileChangeWatcher(path).watch();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

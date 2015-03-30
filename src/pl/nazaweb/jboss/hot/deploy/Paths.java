@@ -11,6 +11,7 @@ public class Paths {
     private static final Paths instance = new Paths();
     private File jbossPath;
     private File projectPath;
+    private boolean isProjectPathSet = false;
 
     private Paths() {
     }
@@ -33,6 +34,11 @@ public class Paths {
 
     public void setProjectPath(File projectPath) {
         this.projectPath = projectPath;
+        this.isProjectPathSet = true;
+    }
+
+    public boolean shouldAttachWatcher() {
+        return isProjectPathSet == false;
     }
 
 }
