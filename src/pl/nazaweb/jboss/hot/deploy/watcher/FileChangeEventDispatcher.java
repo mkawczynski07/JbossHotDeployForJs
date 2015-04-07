@@ -1,10 +1,14 @@
-package pl.nazaweb.jboss.hot.deploy;
+package pl.nazaweb.jboss.hot.deploy.watcher;
 
+import pl.nazaweb.jboss.hot.deploy.events.CreateEventState;
+import pl.nazaweb.jboss.hot.deploy.events.UpdateEventState;
+import pl.nazaweb.jboss.hot.deploy.events.DeleteEventState;
 import java.io.File;
 import static java.nio.file.StandardWatchEventKinds.*;
 import java.nio.file.WatchEvent;
 import java.util.HashMap;
 import java.util.Map;
+import pl.nazaweb.jboss.hot.deploy.events.AbstractEventState;
 
 /**
  *
@@ -12,7 +16,7 @@ import java.util.Map;
  */
 public class FileChangeEventDispatcher {
 
-    private final static Map<WatchEvent.Kind, EventHandler> EVENT_STATES = new HashMap();
+    private final static Map<WatchEvent.Kind, AbstractEventState> EVENT_STATES = new HashMap();
 
     static {
         EVENT_STATES.put(ENTRY_CREATE, new CreateEventState());
@@ -21,7 +25,7 @@ public class FileChangeEventDispatcher {
     }
 
     public void handleEvent(File file, WatchEvent.Kind kind) {
-        EventHandler handler = EVENT_STATES.get(kind);
+        AbstractEventState handler = EVENT_STATES.get(kind);
         if (handler != null) {
             handler.handle(file);
         }

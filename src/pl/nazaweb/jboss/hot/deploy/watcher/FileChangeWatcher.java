@@ -1,4 +1,4 @@
-package pl.nazaweb.jboss.hot.deploy;
+package pl.nazaweb.jboss.hot.deploy.watcher;
 
 import java.io.File;
 import java.io.IOException;
