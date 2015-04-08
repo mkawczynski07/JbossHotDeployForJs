@@ -19,14 +19,19 @@ public class UpdateEventState extends AbstractEventState {
         if (destination.isPresent() == false) {
             return;
         }
-        destination.get().mkdirs();
+        if (file.exists()) {
+            destination.get().mkdirs();
+            tryCopyFile(file, destination.get());
+        }
+    }
+
+    protected void tryCopyFile(File file, File destination) {
         try {
-            Files.copy(file.toPath(), destination.get().toPath(),
+            Files.copy(file.toPath(), destination.toPath(),
                     StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }
-
     }
 
 }
