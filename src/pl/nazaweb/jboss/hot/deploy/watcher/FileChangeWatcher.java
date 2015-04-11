@@ -121,7 +121,8 @@ public class FileChangeWatcher implements Runnable {
                 || filePath.contains(".xhtml")
                 || filePath.contains(".css")
                 || filePath.contains(".jpg")
-                || filePath.contains(".png"));
+                || filePath.contains(".png")
+                || filePath.contains(".rptdesign"));
     }
 
     private boolean shouldIgnoreFile(File file) {
